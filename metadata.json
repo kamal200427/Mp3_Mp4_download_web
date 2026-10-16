@@ -1,0 +1,7 @@
+{
+  "name": "OmniStream Media Studio",
+  "description": "Professional social media video & MP3 downloader with high-speed MP4-to-MP3 extractor and MP3-to-MP4 video visualizer converter.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

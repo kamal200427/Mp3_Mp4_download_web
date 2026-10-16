@@ -37,7 +37,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 lg:py-10 pb-24 md:pb-10">
         {activeTab === 'downloader' && (
           <UrlDownloader
             onMediaProcessed={refreshHistory}
@@ -63,10 +63,12 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer
-        onSelectTab={(tab) => setActiveTab(tab)}
-        onOpenGuide={() => setIsGuideOpen(true)}
-      />
+      <div className="mb-16 md:mb-0">
+        <Footer
+          onSelectTab={(tab) => setActiveTab(tab)}
+          onOpenGuide={() => setIsGuideOpen(true)}
+        />
+      </div>
 
       {/* Supported Sites & Help Guide Modal */}
       <PlatformGuideModal

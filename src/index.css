@@ -22,7 +22,34 @@
   background: rgba(71, 85, 105, 1);
 }
 
-/* Range input styling */
+/* Range input styling with touch-friendly thumb */
 input[type="range"] {
   accent-color: #6366f1;
 }
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Hide scrollbar for touch carousels while keeping scrollability */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Eliminate 300ms tap delay on mobile touch */
+html, button, a, input, select {
+  touch-action: manipulation;
+}
+
+/* Safe area bottom padding for notch/home indicator */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+

@@ -269,15 +269,15 @@ export const Mp3ToMp4Converter: React.FC = () => {
   };
 
   const aspectStyles: Record<VideoAspectRatio, string> = {
-    '16:9': 'aspect-video',
-    '9:16': 'aspect-[9/16] max-h-[460px] mx-auto',
-    '1:1': 'aspect-square max-h-[420px] mx-auto',
+    '16:9': 'aspect-video w-full',
+    '9:16': 'aspect-[9/16] max-h-[340px] sm:max-h-[460px] mx-auto',
+    '1:1': 'aspect-square max-h-[300px] sm:max-h-[420px] mx-auto',
   };
 
   return (
     <div className="space-y-8">
       {/* Header Info */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 lg:p-8 backdrop-blur-sm">
+      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-6 lg:p-8 backdrop-blur-sm">
         <div className="max-w-3xl space-y-2">
           <div className="flex items-center gap-2 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
             <Film className="w-4 h-4" />
@@ -286,14 +286,14 @@ export const Mp3ToMp4Converter: React.FC = () => {
           <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white text-balance">
             MP3 to MP4 Video Visualizer Creator
           </h1>
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-400 text-xs sm:text-sm">
             Convert any MP3 or WAV song into a cinematic video with sound-reactive music visualizers, custom backgrounds, and metadata for YouTube, TikTok, and Instagram.
           </p>
         </div>
       </div>
 
       {/* Main Workspace */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Column: Live Visualizer Preview Canvas */}
         <div className="lg:col-span-7 space-y-6">
           {!decodedBuffer ? (
@@ -306,7 +306,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                   handleFileUpload(e.dataTransfer.files[0]);
                 }
               }}
-              className="border-2 border-dashed border-slate-700 hover:border-indigo-500/80 rounded-2xl p-8 lg:p-12 text-center bg-slate-900/40 hover:bg-slate-900/60 transition-all cursor-pointer group"
+              className="border-2 border-dashed border-slate-700 hover:border-indigo-500/80 rounded-2xl p-6 sm:p-12 text-center bg-slate-900/40 hover:bg-slate-900/60 transition-all cursor-pointer group"
               onClick={() => {
                 const input = document.createElement('input');
                 input.type = 'file';
@@ -321,11 +321,11 @@ export const Mp3ToMp4Converter: React.FC = () => {
               }}
             >
               <div className="max-w-md mx-auto space-y-4">
-                <div className="w-14 h-14 mx-auto rounded-2xl bg-indigo-600/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
-                  <Music className="w-7 h-7" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-2xl bg-indigo-600/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                  <Music className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="font-display text-lg font-semibold text-white">
+                  <h3 className="font-display text-base sm:text-lg font-semibold text-white">
                     Drop your MP3 or Audio Track Here
                   </h3>
                   <p className="text-xs text-slate-400">
@@ -333,7 +333,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                   </p>
                 </div>
                 <div className="pt-2">
-                  <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg shadow-md transition-colors">
+                  <span className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg shadow-md transition-colors">
                     Browse Audio File
                   </span>
                 </div>
@@ -345,7 +345,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                       e.stopPropagation();
                       handleUseSample();
                     }}
-                    className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center justify-center gap-1.5 mx-auto font-medium"
+                    className="min-h-[44px] text-xs text-indigo-400 hover:text-indigo-300 flex items-center justify-center gap-1.5 mx-auto font-medium"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Test instantly with Sample Synth Track</span>
@@ -355,14 +355,14 @@ export const Mp3ToMp4Converter: React.FC = () => {
             </div>
           ) : (
             /* Visualizer Canvas & Controls */
-            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 space-y-5">
+            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <Music className="w-4 h-4 text-indigo-400" />
-                  <span className="text-sm font-semibold text-white truncate max-w-xs">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Music className="w-4 h-4 text-indigo-400 shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-white truncate max-w-[180px] sm:max-w-xs">
                     {audioFileName}
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">
+                  <span className="text-xs text-slate-400 font-mono shrink-0">
                     ({Math.round(decodedBuffer.duration)}s)
                   </span>
                 </div>
@@ -371,7 +371,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                     stopPreview();
                     setDecodedBuffer(null);
                   }}
-                  className="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
+                  className="min-h-[38px] px-2 text-xs text-slate-400 hover:text-white flex items-center gap-1 transition-colors shrink-0"
                 >
                   <RefreshCw className="w-3 h-3" />
                   <span>Change Track</span>
@@ -390,10 +390,10 @@ export const Mp3ToMp4Converter: React.FC = () => {
                 />
 
                 {/* Overlaid Play/Pause button */}
-                <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2">
+                <div className="absolute bottom-3 left-3 z-10 flex items-center gap-2">
                   <button
                     onClick={togglePreview}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-slate-900/90 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg border border-slate-700/80 shadow-lg backdrop-blur-md transition-all active:scale-95"
+                    className="flex items-center gap-2 px-3 py-2 min-h-[40px] bg-slate-900/90 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg border border-slate-700/80 shadow-lg backdrop-blur-md transition-all active:scale-95"
                   >
                     {isPlayingPreview ? (
                       <>
@@ -409,7 +409,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                   </button>
                 </div>
 
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute top-3 right-3 z-10">
                   <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-black/60 border border-white/10 text-slate-300">
                     {settings.aspectRatio} · 1080p
                   </span>
@@ -420,7 +420,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
 
           {/* Generated Video Player Result */}
           {generatedVideoUrl && (
-            <div className="p-5 bg-indigo-950/40 border border-indigo-800/80 rounded-2xl space-y-4 animate-in fade-in">
+            <div className="p-4 sm:p-5 bg-indigo-950/40 border border-indigo-800/80 rounded-2xl space-y-4 animate-in fade-in">
               <div className="flex items-center gap-2 text-sm font-semibold text-emerald-400">
                 <Check className="w-4 h-4" />
                 <span>MP4 Video Generated Successfully!</span>
@@ -440,7 +440,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                     triggerFileDownload(generatedBlob, filename);
                   }
                 }}
-                className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 shadow"
+                className="w-full py-3 min-h-[44px] bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 shadow active:scale-[0.98]"
               >
                 <Download className="w-4 h-4" />
                 <span>Download MP4 Video File</span>
@@ -451,7 +451,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
 
         {/* Right Column: Video Customizer & Export */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 space-y-5">
+          <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 sm:p-6 space-y-5">
             <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
               <Palette className="w-4 h-4 text-indigo-400" />
               <h3 className="font-display text-base font-semibold text-white">
@@ -475,7 +475,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                     key={item.id}
                     type="button"
                     onClick={() => setSettings((p) => ({ ...p, aspectRatio: item.id as any }))}
-                    className={`py-2 px-2 rounded-lg border text-center transition-all ${
+                    className={`py-2.5 px-2 min-h-[44px] rounded-lg border text-center transition-all ${
                       settings.aspectRatio === item.id
                         ? 'bg-indigo-600 text-white border-indigo-500 shadow-sm'
                         : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
@@ -505,7 +505,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
                     key={style.id}
                     type="button"
                     onClick={() => setSettings((p) => ({ ...p, visualizerStyle: style.id as any }))}
-                    className={`py-2 px-2 text-xs font-medium rounded-lg border transition-all text-center ${
+                    className={`py-2 px-1 min-h-[44px] text-xs font-medium rounded-lg border transition-all text-center flex items-center justify-center ${
                       settings.visualizerStyle === style.id
                         ? 'bg-indigo-600/30 text-indigo-200 border-indigo-500'
                         : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
@@ -559,7 +559,7 @@ export const Mp3ToMp4Converter: React.FC = () => {
 
               {/* Upload Custom Background */}
               <div className="pt-1">
-                <label className="flex items-center justify-center gap-1.5 py-1.5 px-3 bg-slate-950 hover:bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-400 hover:text-white cursor-pointer transition-colors">
+                <label className="flex items-center justify-center gap-1.5 py-2.5 px-3 min-h-[44px] bg-slate-950 hover:bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-400 hover:text-white cursor-pointer transition-colors active:scale-[0.98]">
                   <Upload className="w-3.5 h-3.5" />
                   <span>Upload Custom Background Photo</span>
                   <input

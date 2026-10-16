@@ -414,7 +414,7 @@ export const Mp4ToMp3Converter: React.FC = () => {
                 <div className="flex items-center gap-3 pt-2">
                   <button
                     onClick={handleToggleAudioPreview}
-                    className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg transition-colors"
                   >
                     {isPlayingAudio ? (
                       <>
@@ -436,7 +436,7 @@ export const Mp4ToMp3Converter: React.FC = () => {
 
         {/* Right Column: Audio Output Settings & Conversion Button */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 space-y-5">
+          <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 sm:p-6 space-y-5">
             <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
               <Sliders className="w-4 h-4 text-indigo-400" />
               <h3 className="font-display text-base font-semibold text-white">
@@ -451,7 +451,7 @@ export const Mp4ToMp3Converter: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setSettings((p) => ({ ...p, format: 'mp3' }))}
-                  className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all text-center ${
+                  className={`py-2.5 px-3 min-h-[44px] text-xs font-semibold rounded-lg border transition-all text-center flex items-center justify-center ${
                     settings.format === 'mp3'
                       ? 'bg-indigo-600/20 border-indigo-500 text-white'
                       : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
@@ -462,7 +462,7 @@ export const Mp4ToMp3Converter: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setSettings((p) => ({ ...p, format: 'wav' }))}
-                  className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all text-center ${
+                  className={`py-2.5 px-3 min-h-[44px] text-xs font-semibold rounded-lg border transition-all text-center flex items-center justify-center ${
                     settings.format === 'wav'
                       ? 'bg-indigo-600/20 border-indigo-500 text-white'
                       : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
@@ -485,9 +485,9 @@ export const Mp4ToMp3Converter: React.FC = () => {
                       key={b}
                       type="button"
                       onClick={() => setSettings((p) => ({ ...p, bitrate: b as any }))}
-                      className={`py-2 px-1 text-xs font-mono font-semibold rounded-lg border transition-all text-center ${
+                      className={`py-2.5 px-1 min-h-[44px] text-xs font-mono font-semibold rounded-lg border transition-all text-center flex items-center justify-center active:scale-95 ${
                         settings.bitrate === b
-                          ? 'bg-indigo-600 text-white border-indigo-500'
+                          ? 'bg-indigo-600 text-white border-indigo-500 shadow-sm'
                           : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
                       }`}
                     >
@@ -519,28 +519,28 @@ export const Mp4ToMp3Converter: React.FC = () => {
                 step={0.1}
                 value={settings.volumeBoost}
                 onChange={(e) => setSettings((p) => ({ ...p, volumeBoost: parseFloat(e.target.value) }))}
-                className="w-full h-1.5 bg-slate-800 rounded-lg cursor-pointer"
+                className="w-full h-2 bg-slate-800 rounded-lg cursor-pointer"
               />
             </div>
 
             {/* Fade Options */}
-            <div className="grid grid-cols-2 gap-3 pt-1">
-              <label className="flex items-center gap-2 p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-xs cursor-pointer hover:border-slate-700">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-1">
+              <label className="flex items-center gap-2 p-2.5 min-h-[44px] bg-slate-950 border border-slate-800 rounded-lg text-xs cursor-pointer hover:border-slate-700">
                 <input
                   type="checkbox"
                   checked={settings.fadeIn}
                   onChange={(e) => setSettings((p) => ({ ...p, fadeIn: e.target.checked }))}
-                  className="rounded border-slate-700 text-indigo-600 focus:ring-0"
+                  className="w-4 h-4 rounded border-slate-700 text-indigo-600 focus:ring-0"
                 />
                 <span className="text-slate-300 font-medium">Fade In (1.5s)</span>
               </label>
 
-              <label className="flex items-center gap-2 p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-xs cursor-pointer hover:border-slate-700">
+              <label className="flex items-center gap-2 p-2.5 min-h-[44px] bg-slate-950 border border-slate-800 rounded-lg text-xs cursor-pointer hover:border-slate-700">
                 <input
                   type="checkbox"
                   checked={settings.fadeOut}
                   onChange={(e) => setSettings((p) => ({ ...p, fadeOut: e.target.checked }))}
-                  className="rounded border-slate-700 text-indigo-600 focus:ring-0"
+                  className="w-4 h-4 rounded border-slate-700 text-indigo-600 focus:ring-0"
                 />
                 <span className="text-slate-300 font-medium">Fade Out (1.5s)</span>
               </label>
@@ -551,7 +551,7 @@ export const Mp4ToMp3Converter: React.FC = () => {
               <button
                 onClick={handleConvert}
                 disabled={isConverting || !decodedAudioBuffer}
-                className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 text-sm"
+                className="w-full py-3.5 px-4 min-h-[48px] bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 text-sm active:scale-[0.98]"
               >
                 {isConverting ? (
                   <>

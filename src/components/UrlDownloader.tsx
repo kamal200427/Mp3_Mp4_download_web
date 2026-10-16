@@ -131,9 +131,9 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
           </div>
 
           {/* Search Box */}
-          <div className="relative mt-6">
-            <div className="flex flex-col sm:flex-row items-center gap-2 p-1.5 bg-slate-950/90 border border-slate-700/80 rounded-xl focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all shadow-xl">
-              <div className="flex items-center gap-2 w-full px-3 py-1">
+          <div className="relative mt-4 sm:mt-6">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-1.5 sm:p-2 bg-slate-950/90 border border-slate-700/80 rounded-xl focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all shadow-xl">
+              <div className="flex items-center gap-2 w-full px-2 sm:px-3 py-1.5 min-h-[44px]">
                 <Search className="w-5 h-5 text-slate-400 shrink-0" />
                 <input
                   type="url"
@@ -145,7 +145,7 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleAnalyze();
                   }}
-                  placeholder="Paste YouTube, TikTok, Instagram or direct MP4 link here..."
+                  placeholder="Paste YouTube, TikTok, Instagram or MP4 link..."
                   className="w-full bg-transparent text-white text-sm focus:outline-none placeholder:text-slate-500"
                 />
 
@@ -155,8 +155,9 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
                       setUrlInput('');
                       setMediaInfo(null);
                     }}
-                    className="p-1 hover:text-white text-slate-400 transition-colors"
+                    className="p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center hover:text-white text-slate-400 transition-colors"
                     title="Clear input"
+                    aria-label="Clear input"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -164,18 +165,19 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
 
                 <button
                   onClick={handlePaste}
-                  className="hidden sm:flex items-center gap-1 px-2.5 py-1 text-xs text-slate-400 hover:text-slate-200 bg-slate-900 hover:bg-slate-800 rounded-md transition-colors shrink-0"
+                  className="flex items-center gap-1 px-2.5 py-1.5 min-h-[36px] text-xs text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 rounded-md transition-colors shrink-0 border border-slate-800"
                   title="Paste from clipboard"
+                  aria-label="Paste from clipboard"
                 >
-                  <Clipboard className="w-3.5 h-3.5" />
-                  <span>Paste</span>
+                  <Clipboard className="w-3.5 h-3.5 text-indigo-400" />
+                  <span className="font-medium">Paste</span>
                 </button>
               </div>
 
               <button
                 onClick={() => handleAnalyze()}
                 disabled={loading || !urlInput.trim()}
-                className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 text-white text-sm font-semibold rounded-lg transition-all flex items-center justify-center gap-2 shrink-0 shadow-md shadow-indigo-600/30 whitespace-nowrap"
+                className="w-full sm:w-auto px-6 py-3 min-h-[44px] bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:hover:bg-indigo-600 text-white text-sm font-semibold rounded-lg transition-all flex items-center justify-center gap-2 shrink-0 shadow-md shadow-indigo-600/30 whitespace-nowrap active:scale-[0.98]"
               >
                 {loading ? (
                   <>
@@ -196,17 +198,17 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
             )}
           </div>
 
-          {/* Quick 1-Click Sample Links */}
+          {/* Quick 1-Click Sample Links (Swipeable touch carousel on mobile) */}
           <div className="pt-2">
-            <div className="flex items-center justify-center gap-2 flex-wrap text-xs text-slate-400">
-              <span className="text-slate-500 flex items-center gap-1 font-medium">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-400" /> Test Links:
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 w-full justify-start sm:justify-center text-xs text-slate-400 -mx-2 px-2 sm:mx-0 sm:px-0">
+              <span className="text-slate-500 flex items-center gap-1 font-medium whitespace-nowrap shrink-0">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-400" /> Quick Samples:
               </span>
               {SAMPLE_LINKS.map((sample, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSampleClick(sample)}
-                  className="px-2.5 py-1 rounded-md bg-slate-800/80 hover:bg-slate-800 hover:text-slate-200 border border-slate-700/60 transition-colors whitespace-nowrap"
+                  className="min-h-[36px] flex items-center px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 active:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition-colors whitespace-nowrap shrink-0 text-xs"
                 >
                   {sample.badge}
                 </button>
@@ -322,36 +324,36 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
               <div className="flex items-center gap-1 p-1 bg-slate-950 rounded-xl border border-slate-800">
                 <button
                   onClick={() => setDownloadCategory('video')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-all ${
                     downloadCategory === 'video'
                       ? 'bg-indigo-600 text-white shadow-sm'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
                   }`}
                 >
-                  <Film className="w-4 h-4" />
-                  <span>Video (MP4)</span>
+                  <Film className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Video (MP4)</span>
                 </button>
                 <button
                   onClick={() => setDownloadCategory('audio')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-all ${
                     downloadCategory === 'audio'
                       ? 'bg-indigo-600 text-white shadow-sm'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
                   }`}
                 >
-                  <Music className="w-4 h-4" />
-                  <span>Audio (MP3)</span>
+                  <Music className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Audio (MP3)</span>
                 </button>
                 <button
                   onClick={() => setDownloadCategory('thumbnail')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-all ${
                     downloadCategory === 'thumbnail'
                       ? 'bg-indigo-600 text-white shadow-sm'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
                   }`}
                 >
-                  <ImageIcon className="w-4 h-4" />
-                  <span>Cover Art</span>
+                  <ImageIcon className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Cover Art</span>
                 </button>
               </div>
 
@@ -363,20 +365,20 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
                   return (
                     <div
                       key={opt.id}
-                      className="p-3.5 bg-slate-950/70 border border-slate-800/80 rounded-xl hover:border-slate-700 transition-all flex items-center justify-between gap-4"
+                      className="p-3 sm:p-3.5 bg-slate-950/70 border border-slate-800/80 rounded-xl hover:border-slate-700 transition-all flex items-center justify-between gap-3 sm:gap-4"
                     >
-                      <div className="space-y-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-semibold text-white truncate">
+                      <div className="space-y-1 min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-xs sm:text-sm font-semibold text-white truncate">
                             {opt.label}
                           </span>
                           {opt.badge && (
-                            <span className="text-[10px] font-medium text-indigo-400 bg-indigo-950/80 border border-indigo-800/60 px-1.5 py-0.2 rounded">
+                            <span className="text-[9px] sm:text-[10px] font-medium text-indigo-400 bg-indigo-950/80 border border-indigo-800/60 px-1.5 py-0.2 rounded shrink-0">
                               {opt.badge}
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-slate-400 font-mono tabular-nums">
+                        <div className="flex items-center gap-2 text-[11px] sm:text-xs text-slate-400 font-mono tabular-nums">
                           <span>{opt.bitrateOrRes}</span>
                           <span aria-hidden="true">·</span>
                           <span>{opt.estimatedSize}</span>
@@ -387,10 +389,10 @@ export const UrlDownloader: React.FC<UrlDownloaderProps> = ({
                         <button
                           onClick={() => handleDownload(opt)}
                           disabled={!!downloadingId}
-                          className={`flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
+                          className={`flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-xs font-semibold rounded-lg transition-all whitespace-nowrap active:scale-95 ${
                             isThisDownloading
                               ? 'bg-indigo-700 text-white cursor-wait'
-                              : 'bg-indigo-600 hover:bg-indigo-500 text-white hover:shadow-lg hover:shadow-indigo-600/25 active:scale-95'
+                              : 'bg-indigo-600 hover:bg-indigo-500 text-white hover:shadow-lg hover:shadow-indigo-600/25'
                           }`}
                         >
                           {isThisDownloading ? (

@@ -75,50 +75,53 @@ export const DownloadHistory: React.FC<DownloadHistoryProps> = ({
       </div>
 
       {/* Stats Counter Bar */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="p-4 bg-slate-900/40 border border-slate-800 rounded-xl space-y-1">
-          <div className="text-slate-400 text-xs flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5 text-indigo-400" /> Total Processed
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="p-3 sm:p-4 bg-slate-900/40 border border-slate-800 rounded-xl space-y-1">
+          <div className="text-slate-400 text-[11px] sm:text-xs flex items-center gap-1 sm:gap-1.5 truncate">
+            <Layers className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <span className="truncate">Total</span>
           </div>
-          <div className="text-2xl font-bold text-white font-mono tabular-nums">
+          <div className="text-xl sm:text-2xl font-bold text-white font-mono tabular-nums">
             {history.length}
           </div>
         </div>
 
-        <div className="p-4 bg-slate-900/40 border border-slate-800 rounded-xl space-y-1">
-          <div className="text-slate-400 text-xs flex items-center gap-1.5">
-            <Film className="w-3.5 h-3.5 text-cyan-400" /> MP4 Videos
+        <div className="p-3 sm:p-4 bg-slate-900/40 border border-slate-800 rounded-xl space-y-1">
+          <div className="text-slate-400 text-[11px] sm:text-xs flex items-center gap-1 sm:gap-1.5 truncate">
+            <Film className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <span className="truncate">MP4 Videos</span>
           </div>
-          <div className="text-2xl font-bold text-cyan-400 font-mono tabular-nums">
+          <div className="text-xl sm:text-2xl font-bold text-cyan-400 font-mono tabular-nums">
             {videoCount}
           </div>
         </div>
 
-        <div className="p-4 bg-slate-900/40 border border-slate-800 rounded-xl space-y-1">
-          <div className="text-slate-400 text-xs flex items-center gap-1.5">
-            <Music className="w-3.5 h-3.5 text-emerald-400" /> MP3 Audios
+        <div className="p-3 sm:p-4 bg-slate-900/40 border border-slate-800 rounded-xl space-y-1">
+          <div className="text-slate-400 text-[11px] sm:text-xs flex items-center gap-1 sm:gap-1.5 truncate">
+            <Music className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <span className="truncate">MP3 Audios</span>
           </div>
-          <div className="text-2xl font-bold text-emerald-400 font-mono tabular-nums">
+          <div className="text-xl sm:text-2xl font-bold text-emerald-400 font-mono tabular-nums">
             {audioCount}
           </div>
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex items-center gap-1 p-1 bg-slate-900/80 rounded-xl border border-slate-800 w-fit">
+      {/* Filter Tabs (Responsive full width on phone) */}
+      <div className="flex items-center gap-1 p-1 bg-slate-900/80 rounded-xl border border-slate-800 w-full sm:w-fit">
         <button
           onClick={() => setFilter('all')}
-          className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+          className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-all text-center flex items-center justify-center ${
             filter === 'all'
               ? 'bg-indigo-600 text-white shadow-sm'
               : 'text-slate-400 hover:text-white'
           }`}
         >
-          All Items ({history.length})
+          All ({history.length})
         </button>
         <button
           onClick={() => setFilter('video')}
-          className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+          className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-all text-center flex items-center justify-center ${
             filter === 'video'
               ? 'bg-indigo-600 text-white shadow-sm'
               : 'text-slate-400 hover:text-white'
@@ -128,13 +131,13 @@ export const DownloadHistory: React.FC<DownloadHistoryProps> = ({
         </button>
         <button
           onClick={() => setFilter('audio')}
-          className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+          className={`flex-1 sm:flex-initial px-3 sm:px-3.5 py-2.5 min-h-[44px] text-xs font-semibold rounded-lg transition-all text-center flex items-center justify-center ${
             filter === 'audio'
               ? 'bg-indigo-600 text-white shadow-sm'
               : 'text-slate-400 hover:text-white'
           }`}
         >
-          Audio Tracks ({audioCount})
+          Audio ({audioCount})
         </button>
       </div>
 
@@ -213,18 +216,19 @@ export const DownloadHistory: React.FC<DownloadHistoryProps> = ({
                 <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
                   <button
                     onClick={() => {
-                      // Trigger redownload notice
                       alert(`File "${item.title}.${item.format.toLowerCase()}" is archived in your session.`);
                     }}
-                    className="p-2 text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+                    className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg transition-colors"
                     title="Download again"
+                    aria-label="Download again"
                   >
                     <Download className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(item.id)}
-                    className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-950/30 rounded-lg transition-colors"
+                    className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-rose-400 hover:bg-rose-950/30 active:bg-rose-950/50 rounded-lg transition-colors"
                     title="Delete item"
+                    aria-label="Delete item"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
